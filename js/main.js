@@ -6,6 +6,8 @@ const emptyList = document.querySelector("#emptyList");
 
 let tasks = [];
 
+checkEmptyList();
+
 //! add task
 function addTask(e) {
   e.preventDefault();
@@ -41,9 +43,7 @@ function addTask(e) {
   taskInput.value = "";
   taskInput.focus();
 
-  if (tasksList.children.length > 1) {
-    emptyList.classList.add("none");
-  }
+  checkEmptyList();
 }
 
 form.addEventListener("submit", addTask);
@@ -55,16 +55,12 @@ function removeTask(e) {
   const parentNode = e.target.closest("li");
 
   const id = parentNode.id;
-
   const index = tasks.findIndex((task) => task.id === +id);
-
   tasks.splice(index, 1);
 
   parentNode.remove();
 
-  if (tasksList.children.length < 2) {
-    emptyList.classList.remove("none");
-  }
+  checkEmptyList();
 }
 
 tasksList.addEventListener("click", removeTask);
@@ -84,3 +80,21 @@ function doneTask(e) {
 }
 
 tasksList.addEventListener("click", doneTask);
+
+//! show empty list
+function checkEmptyList() {
+  if (tasks.length === 0) {
+    const emptyListHtml = `
+      <li id="emptyList" class="list-group-item empty-list">
+        <img src="./img/leaf.svg" alt="Empty" width="48" class="mt-3">
+        <div class="empty-list__title">Список дел пуст</div>
+      </li>
+    `;
+    tasksList.insertAdjacentHTML("afterbegin", emptyListHtml);
+  }
+
+  if (tasks.length > 0) {
+    const emptyListElement = document.querySelector("#emptyList");
+    emptyListElement ? emptyListElement.remove() : null;
+  }
+}
