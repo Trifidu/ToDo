@@ -1,9 +1,10 @@
-//! find element on screen
+//! elements
 const form = document.querySelector("#form");
 const taskInput = document.querySelector("#taskInput");
 const tasksList = document.querySelector("#tasksList");
 const emptyList = document.querySelector("#emptyList");
 
+//! add task
 function addTask(e) {
   e.preventDefault();
 
@@ -33,3 +34,18 @@ function addTask(e) {
 }
 
 form.addEventListener("submit", addTask);
+
+//! remove task
+function removeTask(e) {
+  if (e.target.dataset.action === "delete") {
+    e.preventDefault();
+    const parentNode = e.target.closest("li");
+    parentNode.remove();
+  }
+
+  if (tasksList.children.length < 2) {
+    emptyList.classList.remove("none");
+  }
+}
+
+tasksList.addEventListener("click", removeTask);
