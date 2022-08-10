@@ -38,7 +38,6 @@ form.addEventListener("submit", addTask);
 //! remove task
 function removeTask(e) {
   if (e.target.dataset.action === "delete") {
-    e.preventDefault();
     const parentNode = e.target.closest("li");
     parentNode.remove();
   }
@@ -49,3 +48,14 @@ function removeTask(e) {
 }
 
 tasksList.addEventListener("click", removeTask);
+
+//! mark task as completed
+function doneTask(e) {
+  if (e.target.dataset.action === "done") {
+    const parentNode = e.target.closest("li");
+    const taskTitle = parentNode.querySelector(".task-title");
+    taskTitle.classList.toggle("task-title--done");
+  }
+}
+
+tasksList.addEventListener("click", doneTask);
