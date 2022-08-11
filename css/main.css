@@ -28,6 +28,13 @@ body {
   padding-top: 5px;
 }
 
+.task-title-list {
+  font-weight: 400;
+  padding-top: 5px;
+  margin-left: auto;
+  color: #5c5a5a
+}
+
 .gray {
   color: #BDBDBD;
 }
@@ -44,6 +51,7 @@ body {
 .task-item__buttons {
   display: flex;
   column-gap: 5px;
+  margin-left: 25px;
 }
 
 .notify-holder {

@@ -1,10 +1,12 @@
 //! elements
 const form = document.querySelector("#form");
 const taskInput = document.querySelector("#taskInput");
+const listInput = document.querySelector("#listInput");
 const tasksList = document.querySelector("#tasksList");
 const emptyList = document.querySelector("#emptyList");
 
 let tasks = [];
+let lists = [];
 
 if (localStorage.getItem("tasks")) {
   tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -13,11 +15,12 @@ if (localStorage.getItem("tasks")) {
 
 checkEmptyList();
 
-//! add task
+//! add task and list
 function addTask(e) {
   e.preventDefault();
 
   const taskText = taskInput.value;
+  const list = listInput.value;
 
   const newTask = {
     id: Date.now(),
@@ -25,13 +28,18 @@ function addTask(e) {
     done: false,
     favorite: false,
     date: Date.now(),
+    list: list,
   };
 
+  if (!lists.includes(newTask.list)) {
+    lists.push(newTask.list);
+  }
   tasks.push(newTask);
 
   renderTask(newTask);
 
   taskInput.value = "";
+  listInput.value = "";
   taskInput.focus();
 
   checkEmptyList();
@@ -79,22 +87,6 @@ function moreBtn(e) {
 }
 
 tasksList.addEventListener("click", moreBtn);
-
-// document.addEventListener("click", (event) => {
-//   const moreElements = document.querySelectorAll(".moreElement");
-//   console.log(moreElements);
-//   moreElements.forEach((elem) => {
-//     const itsElem = event.target == elem || elem.contains(event.target);
-//     const elemShow = elem.classList.contains("show");
-//     console.log(elem);
-//     console.log(itsElem);
-//     console.log(elemShow);
-
-//     if (!itsElem && elemShow) {
-//       closestMoreElem.classList.toggle("show");
-//     }
-//   });
-// });
 
 //! mark task as completed
 function doneTask(e) {
@@ -171,6 +163,7 @@ function renderTask(task) {
   const taskHtml = `
         <li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
 					<span class="${spanClass}">${task.text}</span>
+          <span class="task-title-list">${task.list}</span>
 					<div class="task-item__buttons">
 						<button type="button" data-action="done" class="btn-action">
 							<img src="./img/tick.svg" alt="Done" width="18" height="18">
