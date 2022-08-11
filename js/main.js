@@ -58,6 +58,44 @@ function removeTask(e) {
 
 tasksList.addEventListener("click", removeTask);
 
+//! more button
+function classMenuToggle(e) {
+  const closestMoreElem = e.target.nextElementSibling;
+  closestMoreElem.classList.toggle("show");
+}
+
+function moreBtn(e) {
+  if (e.target.dataset.action !== "more") return;
+
+  const moreElements = document.querySelectorAll(".moreElement");
+
+  moreElements.forEach((elem) => {
+    if (elem.id !== e.target.id) {
+      elem.classList.remove("show");
+    }
+  });
+
+  classMenuToggle(e);
+}
+
+tasksList.addEventListener("click", moreBtn);
+
+// document.addEventListener("click", (event) => {
+//   const moreElements = document.querySelectorAll(".moreElement");
+//   console.log(moreElements);
+//   moreElements.forEach((elem) => {
+//     const itsElem = event.target == elem || elem.contains(event.target);
+//     const elemShow = elem.classList.contains("show");
+//     console.log(elem);
+//     console.log(itsElem);
+//     console.log(elemShow);
+
+//     if (!itsElem && elemShow) {
+//       closestMoreElem.classList.toggle("show");
+//     }
+//   });
+// });
+
 //! mark task as completed
 function doneTask(e) {
   if (e.target.dataset.action !== "done") return;
@@ -141,10 +179,10 @@ function renderTask(task) {
 							<img src="./img/cross.svg" alt="Done" width="18" height="18">
 						</button>
             <div class="btn-group">
-              <button class="btn-action" id="more-btn" type="button">
+              <button data-action="more" class="btn-action" id="${task.id}" type="button">
                 <img src="./img/more.svg" alt="More" width="18" height="18">
               </button>
-              <div class="moreElement"> 
+              <div id="${task.id}" class="moreElement"> 
                 <div class="moreElement_wrapper">
                   <div class="moreElement_item">Добавить подзадачу</div>
                   <div class="moreElement_item">Удалить</div>

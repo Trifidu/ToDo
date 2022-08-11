@@ -49,7 +49,39 @@ function removeTask(e) {
   saveToLocalStorage();
 }
 
-tasksList.addEventListener("click", removeTask); //! mark task as completed
+tasksList.addEventListener("click", removeTask); //! more button
+
+function classMenuToggle(e) {
+  var closestMoreElem = e.target.nextElementSibling;
+  closestMoreElem.classList.toggle("show");
+}
+
+function moreBtn(e) {
+  if (e.target.dataset.action !== "more") return;
+  var moreElements = document.querySelectorAll(".moreElement");
+  moreElements.forEach(function (elem) {
+    if (elem.id !== e.target.id) {
+      elem.classList.remove("show");
+    }
+  });
+  classMenuToggle(e);
+}
+
+tasksList.addEventListener("click", moreBtn); // document.addEventListener("click", (event) => {
+//   const moreElements = document.querySelectorAll(".moreElement");
+//   console.log(moreElements);
+//   moreElements.forEach((elem) => {
+//     const itsElem = event.target == elem || elem.contains(event.target);
+//     const elemShow = elem.classList.contains("show");
+//     console.log(elem);
+//     console.log(itsElem);
+//     console.log(elemShow);
+//     if (!itsElem && elemShow) {
+//       closestMoreElem.classList.toggle("show");
+//     }
+//   });
+// });
+//! mark task as completed
 
 function doneTask(e) {
   if (e.target.dataset.action !== "done") return;
@@ -110,6 +142,6 @@ function renderTask(task) {
     spanClass = "task-title task-title--star";
   }
 
-  var taskHtml = "\n        <li id=\"".concat(task.id, "\" class=\"list-group-item d-flex justify-content-between task-item\">\n\t\t\t\t\t<span class=\"").concat(spanClass, "\">").concat(task.text, "</span>\n\t\t\t\t\t<div class=\"task-item__buttons\">\n\t\t\t\t\t\t<button type=\"button\" data-action=\"done\" class=\"btn-action\">\n\t\t\t\t\t\t\t<img src=\"./img/tick.svg\" alt=\"Done\" width=\"18\" height=\"18\">\n\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<button type=\"button\" data-action=\"delete\" class=\"btn-action\">\n\t\t\t\t\t\t\t<img src=\"./img/cross.svg\" alt=\"Done\" width=\"18\" height=\"18\">\n\t\t\t\t\t\t</button>\n            <div class=\"btn-group\">\n              <button class=\"btn-action\" id=\"more-btn\" type=\"button\">\n                <img src=\"./img/more.svg\" alt=\"More\" width=\"18\" height=\"18\">\n              </button>\n              <div class=\"moreElement\"> \n                <div class=\"moreElement_wrapper\">\n                  <div class=\"moreElement_item\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0434\u0437\u0430\u0434\u0430\u0447\u0443</div>\n                  <div class=\"moreElement_item\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</div>\n                  <div class=\"moreElement_item\">\u0421\u043C\u0435\u043D\u0438\u0442\u044C \u0441\u043F\u0438\u0441\u043E\u043A</div>\n                </div>\n              </div>\n            </div>\n            <button class=\"btn-action\" type=\"button\" data-action=\"star\">\n              <img src=\"./img/star.svg\" alt=\"Star\" width=\"18\" height=\"18\">\n            </button>\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n      ");
+  var taskHtml = "\n        <li id=\"".concat(task.id, "\" class=\"list-group-item d-flex justify-content-between task-item\">\n\t\t\t\t\t<span class=\"").concat(spanClass, "\">").concat(task.text, "</span>\n\t\t\t\t\t<div class=\"task-item__buttons\">\n\t\t\t\t\t\t<button type=\"button\" data-action=\"done\" class=\"btn-action\">\n\t\t\t\t\t\t\t<img src=\"./img/tick.svg\" alt=\"Done\" width=\"18\" height=\"18\">\n\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<button type=\"button\" data-action=\"delete\" class=\"btn-action\">\n\t\t\t\t\t\t\t<img src=\"./img/cross.svg\" alt=\"Done\" width=\"18\" height=\"18\">\n\t\t\t\t\t\t</button>\n            <div class=\"btn-group\">\n              <button data-action=\"more\" class=\"btn-action\" id=\"").concat(task.id, "\" type=\"button\">\n                <img src=\"./img/more.svg\" alt=\"More\" width=\"18\" height=\"18\">\n              </button>\n              <div id=\"").concat(task.id, "\" class=\"moreElement\"> \n                <div class=\"moreElement_wrapper\">\n                  <div class=\"moreElement_item\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0434\u0437\u0430\u0434\u0430\u0447\u0443</div>\n                  <div class=\"moreElement_item\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</div>\n                  <div class=\"moreElement_item\">\u0421\u043C\u0435\u043D\u0438\u0442\u044C \u0441\u043F\u0438\u0441\u043E\u043A</div>\n                </div>\n              </div>\n            </div>\n            <button class=\"btn-action\" type=\"button\" data-action=\"star\">\n              <img src=\"./img/star.svg\" alt=\"Star\" width=\"18\" height=\"18\">\n            </button>\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n      ");
   tasksList.insertAdjacentHTML("beforeend", taskHtml);
 }
