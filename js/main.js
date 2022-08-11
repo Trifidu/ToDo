@@ -23,6 +23,8 @@ function addTask(e) {
     id: Date.now(),
     text: taskText,
     done: false,
+    favorite: false,
+    date: Date.now(),
   };
 
   tasks.push(newTask);
@@ -74,13 +76,32 @@ function doneTask(e) {
 
 tasksList.addEventListener("click", doneTask);
 
+//! favorite task
+function favoriteTask(e) {
+  if (e.target.dataset.action !== "star") return;
+
+  const parentNode = e.target.closest("li");
+
+  const id = parentNode.id;
+  const taskObj = tasks.find((task) => task.id === +id);
+  taskObj.favorite = !taskObj.favorite;
+
+  const taskTitle = parentNode.querySelector(".task-title");
+  taskTitle.classList.toggle("task-title--star");
+
+  saveToLocalStorage();
+}
+
+tasksList.addEventListener("click", favoriteTask);
+
 //! show empty list
 function checkEmptyList() {
   if (tasks.length === 0) {
     const emptyListHtml = `
       <li id="emptyList" class="list-group-item empty-list">
-        <img src="./img/leaf.svg" alt="Empty" width="48" class="mt-3">
-        <div class="empty-list__title">Список дел пуст</div>
+        <img src="./img/no-tasks.svg" alt="Empty" width="48" class="mt-3">
+        <div class="empty-list__title">Все задачи выполнены</div>
+        <div class="empty-list__subtitle">УРА!</div>
       </li>
     `;
     tasksList.insertAdjacentHTML("afterbegin", emptyListHtml);
@@ -99,11 +120,19 @@ function saveToLocalStorage() {
 
 //! render task
 function renderTask(task) {
-  const doneClass = task.done ? "task-title task-title--done" : "task-title";
+  let spanClass = "task-title";
+
+  if (task.done && task.favorite) {
+    spanClass = "task-title task-title--done task-title--star";
+  } else if (task.done) {
+    spanClass = "task-title task-title--done";
+  } else if (task.favorite) {
+    spanClass = "task-title task-title--star";
+  }
 
   const taskHtml = `
         <li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
-					<span class="${doneClass}">${task.text}</span>
+					<span class="${spanClass}">${task.text}</span>
 					<div class="task-item__buttons">
 						<button type="button" data-action="done" class="btn-action">
 							<img src="./img/tick.svg" alt="Done" width="18" height="18">
@@ -111,6 +140,21 @@ function renderTask(task) {
 						<button type="button" data-action="delete" class="btn-action">
 							<img src="./img/cross.svg" alt="Done" width="18" height="18">
 						</button>
+            <div class="btn-group">
+              <button class="btn-action" id="more-btn" type="button">
+                <img src="./img/more.svg" alt="More" width="18" height="18">
+              </button>
+              <div class="moreElement"> 
+                <div class="moreElement_wrapper">
+                  <div class="moreElement_item">Добавить подзадачу</div>
+                  <div class="moreElement_item">Удалить</div>
+                  <div class="moreElement_item">Сменить список</div>
+                </div>
+              </div>
+            </div>
+            <button class="btn-action" type="button" data-action="star">
+              <img src="./img/star.svg" alt="Star" width="18" height="18">
+            </button>
 					</div>
 				</li>
       `;
