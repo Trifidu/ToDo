@@ -163,6 +163,7 @@ function renderTask(task) {
   const taskHtml = `
         <li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
 					<span class="${spanClass}">${task.text}</span>
+          <span class="task-title-list">${task.priority}</span>
           <span class="task-title-list">${task.list}</span>
 					<div class="task-item__buttons">
 						<button type="button" data-action="done" class="btn-action">

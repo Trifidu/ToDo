@@ -32,7 +32,7 @@ body {
   font-weight: 400;
   padding-top: 5px;
   margin-left: auto;
-  color: #5c5a5a
+  margin-right: 0;
 }
 
 .gray {
@@ -160,6 +160,22 @@ body {
 .moreElement_item:hover:after {
   width: 100%;
 }
+
+.priority-wrapper {
+  margin-top: 15px;
+}
+
+.priority-wrapper img {
+  margin-left: 25px;
+}
+
+.priority-wrapper img:hover {
+  background-color: #e0e5ea;
+  border: #757779 solid 1px;
+  opacity: 1;
+  cursor: pointer;
+}
+
 
 
 
