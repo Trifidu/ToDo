@@ -128,6 +128,7 @@ function doneTask(e) {
 
 tasksList.addEventListener("click", doneTask);
 
+//! check tone task and change list
 function checkDoneTask(task, e) {
   let currList = "";
   if (task.list !== "Выполненные") {

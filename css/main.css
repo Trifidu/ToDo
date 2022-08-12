@@ -188,6 +188,20 @@ body {
   cursor: pointer;
 }
 
+.dropdown {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+}
+
+.dropdown {
+  z-index: 1000;
+}
+
+.dropdown-menu {
+  right: 0;
+}
+
 
 
 

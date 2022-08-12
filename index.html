@@ -29,8 +29,22 @@
     <div class="container">
       <div class="display-4 mb-2">ToDo приложение</div>
       <div class="h4 mb-5">список задач на сегодня</div>
-      <div class="cars mb-4"> 
+      <div class="dropdown">
+        <button class="btn btn-lg" id="dropdownMenuButton" type="button" data-dropdown="dropdown" aria-expanded="false"><img src="./img/more-global.svg" alt="more" width="35" height="35"></button>
+        <ul class="dropdown-menu show" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="#">Редактировать списки</a></li>
+          <hr>
+          <li><a class="dropdown-item" href="#">Действие</a></li>
+          <li><a class="dropdown-item" href="#">Другое действие</a></li>
+          <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+        </ul>
+      </div>
+      <div class="cards mb-4"> 
         <ul class="list-group list-group-flush" id="tasksList"></ul>
+        <div class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Выполненные</div>
+        <ul class="list-group list-group-flush bg-light collapse show" id="collapseExample">
+          <div class="card card-body">некоторый текст</div>
+        </ul>
       </div>
       <div class="card bg-light">
         <div class="card-header">Добавить задачу</div>
