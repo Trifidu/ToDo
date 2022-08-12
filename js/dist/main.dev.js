@@ -16,12 +16,16 @@ if (localStorage.getItem("tasks")) {
   });
 }
 
+if (localStorage.getItem("lists")) {
+  lists = JSON.parse(localStorage.getItem("lists"));
+}
+
 checkEmptyList(); //! add task and list
 
 function addTask(e) {
   e.preventDefault();
   var taskText = taskInput.value;
-  var list = listInput.value;
+  var list = listInput.value > 0 ? listInput.value : "Нет списка";
   var newTask = {
     id: Date.now(),
     text: taskText,
@@ -124,6 +128,7 @@ function checkEmptyList() {
 
 function saveToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("lists", JSON.stringify(lists));
 } //! render task
 
 

@@ -13,6 +13,10 @@ if (localStorage.getItem("tasks")) {
   tasks.forEach((task) => renderTask(task));
 }
 
+if (localStorage.getItem("lists")) {
+  lists = JSON.parse(localStorage.getItem("lists"));
+}
+
 checkEmptyList();
 
 //! add task and list
@@ -20,7 +24,7 @@ function addTask(e) {
   e.preventDefault();
 
   const taskText = taskInput.value;
-  const list = listInput.value;
+  const list = listInput.value > 0 ? listInput.value : "Нет списка";
 
   const newTask = {
     id: Date.now(),
@@ -146,6 +150,7 @@ function checkEmptyList() {
 //! save to local storage
 function saveToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("lists", JSON.stringify(lists));
 }
 
 //! render task
