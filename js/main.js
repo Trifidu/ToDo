@@ -205,12 +205,12 @@ function renderTask(task) {
         '<img src="./img/medium.svg" alt="medium" width="18" height="18">';
       break;
   }
-
+  // d-flex justify-content-between
   const taskHtml = `
         <li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
 					<span class="${spanClass}">${task.text}</span>
-          <span class="task-title-list">${priority}</span>
-          <span class="task-title-list">${task.list}</span>
+            <span class="task-title-list">${priority}</span>
+            <span class="task-title-list">${task.list}</span>
 					<div class="task-item__buttons">
 						<button type="button" data-action="done" class="btn-action">
 							<img src="./img/tick.svg" alt="Done" width="18" height="18">

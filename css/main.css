@@ -24,15 +24,21 @@ body {
 }
 
 .task-title {
+  min-width: 65%;
   font-weight: 400;
   padding-top: 5px;
 }
 
 .task-title-list {
+  width: 100px;
   font-weight: 400;
   padding-top: 5px;
-  margin-left: auto;
-  margin-right: 0;
+}
+
+.more-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .gray {
