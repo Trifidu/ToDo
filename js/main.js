@@ -8,7 +8,7 @@ const tasksList = document.querySelector("#tasksList");
 const emptyList = document.querySelector("#emptyList");
 
 let tasks = [];
-let lists = [];
+let lists = ["Выполненные"];
 
 let priority = "";
 
@@ -38,6 +38,7 @@ function addTask(e) {
     done: false,
     favorite: false,
     list: list,
+    prevList: "",
     priority: "",
     descr: descrText,
     createDate: Date.now(),
@@ -121,10 +122,27 @@ function doneTask(e) {
   const taskTitle = parentNode.querySelector(".task-title");
   taskTitle.classList.toggle("task-title--done");
 
+  checkDoneTask(taskObj, e);
   saveToLocalStorage();
 }
 
 tasksList.addEventListener("click", doneTask);
+
+function checkDoneTask(task, e) {
+  let currList = "";
+  if (task.list !== "Выполненные") {
+    task.prevList = task.list;
+    task.list = "Выполненные";
+    currList = task.list;
+  } else {
+    task.list = task.prevList;
+    currList = task.list;
+  }
+
+  const parentNode = e.target.closest("li");
+  const taskList = parentNode.querySelector(".task-title-list");
+  taskList.textContent = `${currList}`;
+}
 
 //! favorite task
 function favoriteTask(e) {
@@ -213,11 +231,11 @@ function renderTask(task) {
         '<img src="./img/medium.svg" alt="medium" width="18" height="18">';
       break;
   }
-  // d-flex justify-content-between
+
   const taskHtml = `
         <li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
 					<span class="${spanClass}">${task.text}</span>
-            <span class="task-title-list">${priority}</span>
+            <span class="task-title-priority">${priority}</span>
             <span class="task-title-list">${task.list}</span>
 					<div class="task-item__buttons">
 						<button type="button" data-action="done" class="btn-action">
