@@ -3,6 +3,7 @@
 //! elements
 var form = document.querySelector("#form");
 var taskInput = document.querySelector("#taskInput");
+var descrInput = document.querySelector("#descrInput");
 var listInput = document.querySelector("#listInput");
 var tasksList = document.querySelector("#tasksList");
 var emptyList = document.querySelector("#emptyList");
@@ -26,15 +27,17 @@ checkEmptyList(); //! add task and list
 function addTask(e) {
   e.preventDefault();
   var taskText = taskInput.value;
+  var descrText = descrInput.value;
   var list = listInput.value > 0 ? listInput.value : "Нет списка";
   var newTask = {
     id: Date.now(),
     text: taskText,
     done: false,
     favorite: false,
-    date: Date.now(),
     list: list,
-    priority: ""
+    priority: "",
+    descr: descrText,
+    createDate: Date.now()
   };
   priority.length > 0 ? newTask.priority = priority : newTask.priority = "medium";
 
@@ -47,6 +50,7 @@ function addTask(e) {
   taskInput.value = "";
   listInput.value = "";
   priority = "";
+  descrInput.value = "";
   taskInput.focus();
   checkEmptyList();
   saveToLocalStorage();

@@ -1,6 +1,7 @@
 //! elements
 const form = document.querySelector("#form");
 const taskInput = document.querySelector("#taskInput");
+const descrInput = document.querySelector("#descrInput");
 const listInput = document.querySelector("#listInput");
 const tasksList = document.querySelector("#tasksList");
 const emptyList = document.querySelector("#emptyList");
@@ -26,6 +27,7 @@ function addTask(e) {
   e.preventDefault();
 
   const taskText = taskInput.value;
+  const descrText = descrInput.value;
   const list = listInput.value > 0 ? listInput.value : "Нет списка";
 
   const newTask = {
@@ -33,9 +35,10 @@ function addTask(e) {
     text: taskText,
     done: false,
     favorite: false,
-    date: Date.now(),
     list: list,
     priority: "",
+    descr: descrText,
+    createDate: Date.now(),
   };
 
   priority.length > 0
@@ -52,6 +55,7 @@ function addTask(e) {
   taskInput.value = "";
   listInput.value = "";
   priority = "";
+  descrInput.value = "";
   taskInput.focus();
 
   checkEmptyList();
