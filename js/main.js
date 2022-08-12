@@ -6,15 +6,23 @@ const descrInput = document.querySelector("#descrInput");
 const dateInput = document.querySelector("#dateInput");
 const tasksList = document.querySelector("#tasksList");
 const emptyList = document.querySelector("#emptyList");
+const doneTasksBtn = document.querySelector("#doneTasks");
+const doneTasksList = document.querySelector("#accordionDone");
 
 let tasks = [];
+let tasksDone = [];
 let lists = ["Выполненные"];
 
 let priority = "";
 
 if (localStorage.getItem("tasks")) {
   tasks = JSON.parse(localStorage.getItem("tasks"));
-  tasks.forEach((task) => renderTask(task));
+  tasks.forEach((task) => renderTask(task, tasksList));
+}
+
+if (localStorage.getItem("tasksDone")) {
+  tasksDone = JSON.parse(localStorage.getItem("tasksDone"));
+  tasksDone.forEach((task) => renderTask(task, doneTasksList));
 }
 
 if (localStorage.getItem("lists")) {
@@ -54,7 +62,7 @@ function addTask(e) {
   }
   tasks.push(newTask);
 
-  renderTask(newTask);
+  renderTask(newTask, tasksList);
 
   taskInput.value = "";
   listInput.value = "";
@@ -123,6 +131,15 @@ function doneTask(e) {
   taskTitle.classList.toggle("task-title--done");
 
   checkDoneTask(taskObj, e);
+  renderTask(taskObj, doneTasksList);
+
+  const index = tasks.findIndex((task) => task.id === +id);
+  tasksDone.push(tasks[index]);
+  tasks.splice(index, 1);
+
+  parentNode.remove();
+
+  checkEmptyList();
   saveToLocalStorage();
 }
 
@@ -196,13 +213,13 @@ function checkEmptyList() {
 function saveToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
   localStorage.setItem("lists", JSON.stringify(lists));
+  localStorage.setItem("tasksDone", JSON.stringify(tasksDone));
 }
 
 //! render task
-function renderTask(task) {
+function renderTask(task, place) {
   let spanClass = "task-title";
   let priority = "";
-  // ${task.priority}
 
   if (task.done && task.favorite) {
     spanClass = "task-title task-title--done task-title--star";
@@ -264,5 +281,5 @@ function renderTask(task) {
 				</li>
       `;
 
-  tasksList.insertAdjacentHTML("beforeend", taskHtml);
+  place.insertAdjacentHTML("beforeend", taskHtml);
 }
