@@ -3,8 +3,9 @@
 //! elements
 var form = document.querySelector("#form");
 var taskInput = document.querySelector("#taskInput");
-var descrInput = document.querySelector("#descrInput");
 var listInput = document.querySelector("#listInput");
+var descrInput = document.querySelector("#descrInput");
+var dateInput = document.querySelector("#dateInput");
 var tasksList = document.querySelector("#tasksList");
 var emptyList = document.querySelector("#emptyList");
 var tasks = [];
@@ -28,6 +29,7 @@ function addTask(e) {
   e.preventDefault();
   var taskText = taskInput.value;
   var descrText = descrInput.value;
+  var dateText = dateInput.value;
   var list = listInput.value > 0 ? listInput.value : "Нет списка";
   var newTask = {
     id: Date.now(),
@@ -37,7 +39,8 @@ function addTask(e) {
     list: list,
     priority: "",
     descr: descrText,
-    createDate: Date.now()
+    createDate: Date.now(),
+    endDate: dateText
   };
   priority.length > 0 ? newTask.priority = priority : newTask.priority = "medium";
 
@@ -51,6 +54,7 @@ function addTask(e) {
   listInput.value = "";
   priority = "";
   descrInput.value = "";
+  dateInput.value = "";
   taskInput.focus();
   checkEmptyList();
   saveToLocalStorage();
