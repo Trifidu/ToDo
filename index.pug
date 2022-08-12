@@ -54,11 +54,11 @@ html(lang="ru")
                             input.form-control#taskInput(type='text' placeholder="Текст задачи" required)
                             input.form-control.mt-3#listInput(type='text' placeholder="Список")
                             .priority-wrapper Установить приоритет
-                                img(src="./img/lowest.svg" alt="Star" width="25" height="25")
-                                img(src="./img/low.svg" alt="Star" width="25" height="25")
-                                img(src="./img/medium.svg" alt="Star" width="25" height="25")
-                                img(src="./img/high.svg" alt="Star" width="25" height="25")
-                                img(src="./img/highest.svg" alt="Star" width="25" height="25")
+                                img(src="./img/lowest.svg" alt="lowest" data-priority='lowest' width="25" height="25")
+                                img(src="./img/low.svg" alt="low" data-priority='low' width="25" height="25")
+                                img(src="./img/medium.svg" alt="medium" data-priority='medium' width="25" height="25")
+                                img(src="./img/high.svg" alt="high" data-priority='high' width="25" height="25")
+                                img(src="./img/highest.svg" alt="highest" data-priority='highest' width="25" height="25")
                             small.form-text.text-muted#emailHelp Что делаем, сколько времени тратим, какой результат получаем.
                         button.btn.btn-primary.btn-lg.active(type='submit') Добавить
         script(src="js/main.js")

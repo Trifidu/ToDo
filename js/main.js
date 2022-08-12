@@ -8,6 +8,8 @@ const emptyList = document.querySelector("#emptyList");
 let tasks = [];
 let lists = [];
 
+let priority = "";
+
 if (localStorage.getItem("tasks")) {
   tasks = JSON.parse(localStorage.getItem("tasks"));
   tasks.forEach((task) => renderTask(task));
@@ -33,7 +35,12 @@ function addTask(e) {
     favorite: false,
     date: Date.now(),
     list: list,
+    priority: "",
   };
+
+  priority.length > 0
+    ? (newTask.priority = priority)
+    : (newTask.priority = "medium");
 
   if (!lists.includes(newTask.list)) {
     lists.push(newTask.list);
@@ -44,6 +51,7 @@ function addTask(e) {
 
   taskInput.value = "";
   listInput.value = "";
+  priority = "";
   taskInput.focus();
 
   checkEmptyList();
@@ -128,6 +136,16 @@ function favoriteTask(e) {
 
 tasksList.addEventListener("click", favoriteTask);
 
+//! add priority
+function addPriority(e) {
+  if (!e.target.dataset.priority) return;
+  priority = e.target.dataset.priority;
+  console.log(priority);
+  return priority;
+}
+
+document.addEventListener("click", addPriority);
+
 //! show empty list
 function checkEmptyList() {
   if (tasks.length === 0) {
@@ -156,6 +174,8 @@ function saveToLocalStorage() {
 //! render task
 function renderTask(task) {
   let spanClass = "task-title";
+  let priority = "";
+  // ${task.priority}
 
   if (task.done && task.favorite) {
     spanClass = "task-title task-title--done task-title--star";
@@ -165,10 +185,31 @@ function renderTask(task) {
     spanClass = "task-title task-title--star";
   }
 
+  switch (task.priority) {
+    case "lowest":
+      priority =
+        '<img src="./img/lowest.svg" alt="lowest" width="18" height="18">';
+      break;
+    case "low":
+      priority = '<img src="./img/low.svg" alt="low" width="18" height="18">';
+      break;
+    case "high":
+      priority = '<img src="./img/high.svg" alt="high" width="18" height="18">';
+      break;
+    case "highest":
+      priority =
+        '<img src="./img/highest.svg" alt="highest" width="18" height="18">';
+      break;
+    default:
+      priority =
+        '<img src="./img/medium.svg" alt="medium" width="18" height="18">';
+      break;
+  }
+
   const taskHtml = `
         <li id="${task.id}" class="list-group-item d-flex justify-content-between task-item">
 					<span class="${spanClass}">${task.text}</span>
-          <span class="task-title-list">${task.priority}</span>
+          <span class="task-title-list">${priority}</span>
           <span class="task-title-list">${task.list}</span>
 					<div class="task-item__buttons">
 						<button type="button" data-action="done" class="btn-action">
