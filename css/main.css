@@ -199,6 +199,10 @@ body {
   right: 0;
 }
 
+.dropdown-item {
+  cursor: pointer;
+}
+
 
 
 @media (max-width: 560px) {

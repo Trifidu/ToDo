@@ -9,6 +9,8 @@ const emptyList = document.querySelector("#emptyList");
 const doneTasksBtn = document.querySelector("#doneTasks");
 const doneTasksList = document.querySelector("#accordionDone");
 const doneTasksCounter = document.querySelector("#doneTasksCounter");
+const dropdownMenuButton = document.querySelector("#dropdownMenuButton");
+const mainDropdownMenu = document.querySelector("#mainDropdownMenu");
 
 let tasks = [];
 let tasksDone = [];
@@ -300,6 +302,13 @@ function saveToLocalStorage() {
   localStorage.setItem("lists", JSON.stringify(lists));
   localStorage.setItem("tasksDone", JSON.stringify(tasksDone));
 }
+
+//! open main menu
+function openMainMenu(e) {
+  mainDropdownMenu.classList.toggle("show");
+}
+
+dropdownMenuButton.addEventListener("click", openMainMenu);
 
 //! render task
 function renderTask(task, place) {

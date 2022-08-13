@@ -31,16 +31,16 @@ html(lang="ru")
             .dropdown
                 button.btn.btn-lg#dropdownMenuButton(type="button" data-dropdown="dropdown" aria-expanded="false")
                     img(src="./img/more-global.svg" alt="more" width="35" height="35")
-                ul.dropdown-menu(aria-labelledby="dropdownMenuButton")
+                ul.dropdown-menu#mainDropdownMenu(aria-labelledby="dropdownMenuButton")
                     li
-                        a.dropdown-item(href="#") Редактировать списки
+                        .dropdown-item Редактировать списки
                     hr
                     li
-                        a.dropdown-item(href="#") Действие
+                        .dropdown-item Действие
                     li
-                        a.dropdown-item(href="#") Другое действие
+                        .dropdown-item Другое действие
                     li
-                        a.dropdown-item(href="#") Что-то еще здесь
+                        .dropdown-item Что-то еще здесь
             .cards.mb-4 
                 ul.list-group.list-group-flush#tasksList
                     //- li#id.list-group-item.d-flex.justify-content-between.task-item
