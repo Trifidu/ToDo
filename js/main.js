@@ -168,6 +168,35 @@ function doneTask(e) {
 
 tasksList.addEventListener("click", doneTask);
 
+//! mark task is uncompleted
+function undoneTask(e) {
+  if (e.target.dataset.action !== "done") return;
+
+  const parentNode = e.target.closest("li");
+
+  const id = parentNode.id;
+  const taskObj = tasksDone.find((task) => task.id === +id);
+  taskObj.done = !taskObj.done;
+
+  const taskTitle = parentNode.querySelector(".task-title");
+  taskTitle.classList.toggle("task-title--done");
+
+  checkDoneTask(taskObj, e);
+  renderTask(taskObj, tasksList);
+
+  const index = tasksDone.findIndex((task) => task.id === +id);
+  tasks.push(tasksDone[index]);
+  tasksDone.splice(index, 1);
+
+  parentNode.remove();
+
+  checkEmptyList();
+  saveToLocalStorage();
+  doneTasksCounting();
+}
+
+doneTasksList.addEventListener("click", undoneTask);
+
 //! check done task and change list
 function checkDoneTask(task, e) {
   let currList = "";
