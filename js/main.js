@@ -247,6 +247,24 @@ function favoriteTask(e) {
 
 tasksList.addEventListener("click", favoriteTask);
 
+//! favorite task in done list
+function favoriteTaskDone(e) {
+  if (e.target.dataset.action !== "star") return;
+
+  const parentNode = e.target.closest("li");
+
+  const id = parentNode.id;
+  const taskObj = tasksDone.find((task) => task.id === +id);
+  taskObj.favorite = !taskObj.favorite;
+
+  const taskTitle = parentNode.querySelector(".task-title");
+  taskTitle.classList.toggle("task-title--star");
+
+  saveToLocalStorage();
+}
+
+doneTasksList.addEventListener("click", favoriteTaskDone);
+
 //! add priority
 function addPriority(e) {
   if (!e.target.dataset.priority) return;
