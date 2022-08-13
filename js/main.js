@@ -16,6 +16,7 @@ let lists = ["Выполненные"];
 
 let priority = "";
 
+//! load render
 if (localStorage.getItem("tasks")) {
   tasks = JSON.parse(localStorage.getItem("tasks"));
   tasks.forEach((task) => renderTask(task, tasksList));
@@ -97,6 +98,24 @@ function removeTask(e) {
 
 tasksList.addEventListener("click", removeTask);
 
+function removeTaskData(e) {
+  if (e.target.dataset.action !== "delete") return;
+
+  const parentNode = e.target.closest("li");
+
+  const id = parentNode.id;
+  const index = tasksDone.findIndex((task) => task.id === +id);
+  tasksDone.splice(index, 1);
+
+  parentNode.remove();
+
+  checkEmptyList();
+  saveToLocalStorage();
+  doneTasksCounting();
+}
+
+doneTasksList.addEventListener("click", removeTaskData);
+
 //! more button
 function classMenuToggle(e) {
   const closestMoreElem = e.target.nextElementSibling;
@@ -143,6 +162,7 @@ function doneTask(e) {
 
   checkEmptyList();
   saveToLocalStorage();
+  doneTasksCounting();
 }
 
 tasksList.addEventListener("click", doneTask);

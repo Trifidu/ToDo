@@ -14,7 +14,7 @@ var doneTasksCounter = document.querySelector("#doneTasksCounter");
 var tasks = [];
 var tasksDone = [];
 var lists = ["Выполненные"];
-var priority = "";
+var priority = ""; //! load render
 
 if (localStorage.getItem("tasks")) {
   tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -88,7 +88,23 @@ function removeTask(e) {
   saveToLocalStorage();
 }
 
-tasksList.addEventListener("click", removeTask); //! more button
+tasksList.addEventListener("click", removeTask);
+
+function removeTaskData(e) {
+  if (e.target.dataset.action !== "delete") return;
+  var parentNode = e.target.closest("li");
+  var id = parentNode.id;
+  var index = tasksDone.findIndex(function (task) {
+    return task.id === +id;
+  });
+  tasksDone.splice(index, 1);
+  parentNode.remove();
+  checkEmptyList();
+  saveToLocalStorage();
+  doneTasksCounting();
+}
+
+doneTasksList.addEventListener("click", removeTaskData); //! more button
 
 function classMenuToggle(e) {
   var closestMoreElem = e.target.nextElementSibling;
@@ -128,6 +144,7 @@ function doneTask(e) {
   parentNode.remove();
   checkEmptyList();
   saveToLocalStorage();
+  doneTasksCounting();
 }
 
 tasksList.addEventListener("click", doneTask); //! check done task and change list
