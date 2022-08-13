@@ -33,10 +33,21 @@ html(lang="ru")
                     img(src="./img/more-global.svg" alt="more" width="35" height="35")
                 ul.dropdown-menu#mainDropdownMenu(aria-labelledby="dropdownMenuButton")
                     li
-                        .dropdown-item Редактировать списки
-                    hr
+                        span.dropdown-item-text.dropdown-item-text-menu Сортировка
+                    li                         
+                        .dropdown-item В моем порядке
+                    li 
+                        .dropdown-item По дате создания
+                    li 
+                        .dropdown-item По дате завершения
+                    <li><hr class="dropdown-divider"></li>
                     li
-                        .dropdown-item Действие
+                        span.dropdown-item-text.dropdown-item-text-menu Списки
+                    li
+                        .dropdown-item Редактировать списки
+                    <li><hr class="dropdown-divider"></li>
+                    li
+                        .dropdown-item Удалить все выполненные
                     li
                         .dropdown-item Другое действие
                     li
