@@ -122,7 +122,8 @@ function moreBtn(e) {
   classMenuToggle(e);
 }
 
-tasksList.addEventListener("click", moreBtn); //! mark task as completed
+tasksList.addEventListener("click", moreBtn);
+doneTasksList.addEventListener("click", moreBtn); //! mark task as completed
 
 function doneTask(e) {
   if (e.target.dataset.action !== "done") return;

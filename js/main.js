@@ -137,6 +137,7 @@ function moreBtn(e) {
 }
 
 tasksList.addEventListener("click", moreBtn);
+doneTasksList.addEventListener("click", moreBtn);
 
 //! mark task as completed
 function doneTask(e) {
