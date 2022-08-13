@@ -128,7 +128,7 @@ function doneTask(e) {
   saveToLocalStorage();
 }
 
-tasksList.addEventListener("click", doneTask); //! check tone task and change list
+tasksList.addEventListener("click", doneTask); //! check done task and change list
 
 function checkDoneTask(task, e) {
   var currList = "";
@@ -145,8 +145,16 @@ function checkDoneTask(task, e) {
   var parentNode = e.target.closest("li");
   var taskList = parentNode.querySelector(".task-title-list");
   taskList.textContent = "".concat(currList);
-} //! favorite task
+} //! toggle done list
 
+
+function toggleDoneList(e) {
+  if (e.target !== doneTasksBtn) return;
+  doneTasksBtn.classList.toggle("collapsed");
+  doneTasksList.classList.toggle("none");
+}
+
+document.addEventListener("click", toggleDoneList); //! favorite task
 
 function favoriteTask(e) {
   if (e.target.dataset.action !== "star") return;

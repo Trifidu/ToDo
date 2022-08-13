@@ -62,26 +62,26 @@ html(lang="ru")
                 
                 .accordion.accordion-flush.mt-2
                     .accordion-item
-                        h2.accordion-header#flush-headingOne
+                        h2.accordion-header
                             button.accordion-button.collapsed#doneTasks(type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne") Выполненные
 
-                        ul.list-group.list-group-flush#accordionDone
-                            li#id.list-group-item.d-flex.justify-content-between.task-item
-                                span.task-title task test
-                                div.task-item__buttons
-                                    button.btn-action(type="button" data-action="done")
-                                        img(src="./img/tick.svg" alt="Done" width="18" height="18")
-                                    button.btn-action(type="button" data-action="delete")
-                                        img(src="./img/cross.svg" alt="Done" width="18" height="18")
-                                    button.btn-action#more-btn(type="button")
-                                        img(src="./img/more.svg" alt="More" width="18" height="18")
-                                    .moreElement 
-                                        .moreElement_wrapper
-                                            .moreElement_item Добавить подзадачу
-                                            .moreElement_item Удалить
-                                            .moreElement_item Сменить список
-                                    button.btn-action#more-btn(type="button" data-action="star")
-                                        img(src="./img/star.svg" alt="Star" width="18" height="18")
+                        ul.list-group.list-group-flush.none#accordionDone
+                            //- li#id.list-group-item.d-flex.justify-content-between.task-item
+                            //-     span.task-title task test
+                            //-     div.task-item__buttons
+                            //-         button.btn-action(type="button" data-action="done")
+                            //-             img(src="./img/tick.svg" alt="Done" width="18" height="18")
+                            //-         button.btn-action(type="button" data-action="delete")
+                            //-             img(src="./img/cross.svg" alt="Done" width="18" height="18")
+                            //-         button.btn-action#more-btn(type="button")
+                            //-             img(src="./img/more.svg" alt="More" width="18" height="18")
+                            //-         .moreElement 
+                            //-             .moreElement_wrapper
+                            //-                 .moreElement_item Добавить подзадачу
+                            //-                 .moreElement_item Удалить
+                            //-                 .moreElement_item Сменить список
+                            //-         button.btn-action#more-btn(type="button" data-action="star")
+                            //-             img(src="./img/star.svg" alt="Star" width="18" height="18")
 
             .card.bg-light
                 .card-header Добавить задачу

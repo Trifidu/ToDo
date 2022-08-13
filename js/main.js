@@ -145,7 +145,7 @@ function doneTask(e) {
 
 tasksList.addEventListener("click", doneTask);
 
-//! check tone task and change list
+//! check done task and change list
 function checkDoneTask(task, e) {
   let currList = "";
   if (task.list !== "Выполненные") {
@@ -161,6 +161,15 @@ function checkDoneTask(task, e) {
   const taskList = parentNode.querySelector(".task-title-list");
   taskList.textContent = `${currList}`;
 }
+
+//! toggle done list
+function toggleDoneList(e) {
+  if (e.target !== doneTasksBtn) return;
+  doneTasksBtn.classList.toggle("collapsed");
+  doneTasksList.classList.toggle("none");
+}
+
+document.addEventListener("click", toggleDoneList);
 
 //! favorite task
 function favoriteTask(e) {
