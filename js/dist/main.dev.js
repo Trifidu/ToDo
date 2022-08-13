@@ -10,6 +10,7 @@ var tasksList = document.querySelector("#tasksList");
 var emptyList = document.querySelector("#emptyList");
 var doneTasksBtn = document.querySelector("#doneTasks");
 var doneTasksList = document.querySelector("#accordionDone");
+var doneTasksCounter = document.querySelector("#doneTasksCounter");
 var tasks = [];
 var tasksDone = [];
 var lists = ["Выполненные"];
@@ -33,7 +34,8 @@ if (localStorage.getItem("lists")) {
   lists = JSON.parse(localStorage.getItem("lists"));
 }
 
-checkEmptyList(); //! add task and list
+checkEmptyList();
+doneTasksCounting(); //! add task and list
 
 function addTask(e) {
   e.preventDefault();
@@ -145,6 +147,12 @@ function checkDoneTask(task, e) {
   var parentNode = e.target.closest("li");
   var taskList = parentNode.querySelector(".task-title-list");
   taskList.textContent = "".concat(currList);
+  doneTasksCounting();
+}
+
+function doneTasksCounting() {
+  var count = tasksDone.length;
+  doneTasksCounter.textContent = "".concat(count);
 } //! toggle done list
 
 

@@ -8,6 +8,7 @@ const tasksList = document.querySelector("#tasksList");
 const emptyList = document.querySelector("#emptyList");
 const doneTasksBtn = document.querySelector("#doneTasks");
 const doneTasksList = document.querySelector("#accordionDone");
+const doneTasksCounter = document.querySelector("#doneTasksCounter");
 
 let tasks = [];
 let tasksDone = [];
@@ -30,6 +31,7 @@ if (localStorage.getItem("lists")) {
 }
 
 checkEmptyList();
+doneTasksCounting();
 
 //! add task and list
 function addTask(e) {
@@ -160,6 +162,12 @@ function checkDoneTask(task, e) {
   const parentNode = e.target.closest("li");
   const taskList = parentNode.querySelector(".task-title-list");
   taskList.textContent = `${currList}`;
+  doneTasksCounting();
+}
+
+function doneTasksCounting() {
+  const count = tasksDone.length;
+  doneTasksCounter.textContent = `${count}`;
 }
 
 //! toggle done list

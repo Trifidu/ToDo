@@ -63,7 +63,8 @@ html(lang="ru")
                 .accordion.accordion-flush.mt-2
                     .accordion-item
                         h2.accordion-header
-                            button.accordion-button.collapsed#doneTasks(type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne") Выполненные
+                            button.accordion-button.collapsed#doneTasks(type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne") Выполненные⠀
+                                span.badge.bg-secondary#doneTasksCounter 0
 
                         ul.list-group.list-group-flush.none#accordionDone
                             //- li#id.list-group-item.d-flex.justify-content-between.task-item
