@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="./img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body> 
+    <div class="container">
+      <div class="display-4 mb-2">ToDo приложение</div>
+      <div class="h4 mb-5">список задач на сегодня</div>
+      <div class="dropdown">
+        <button class="btn btn-lg" id="dropdownMenuButton" type="button" data-dropdown="dropdown" aria-expanded="false"><img src="./img/more-global.svg" alt="more" width="35" height="35"></button>
+        <ul class="dropdown-menu" id="mainDropdownMenu" aria-labelledby="dropdownMenuButton">
+          <li><span class="dropdown-item-text dropdown-item-text-menu">Сортировка</span></li>
+          <li>                        
+            <div class="dropdown-item">В моем порядке</div>
+          </li>
+          <li> 
+            <div class="dropdown-item">По дате создания</div>
+          </li>
+          <li> 
+            <div class="dropdown-item">По дате завершения</div>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><span class="dropdown-item-text dropdown-item-text-menu">Списки</span></li>
+          <li>
+            <div class="dropdown-item">Создать список</div>
+          </li>
+          <li>
+            <div class="dropdown-item">Редактировать списки</div>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <div class="dropdown-item">Удалить все выполненные</div>
+          </li>
+          <li>
+            <div class="dropdown-item">Другое действие</div>
+          </li>
+          <li>
+            <div class="dropdown-item">Что-то еще здесь</div>
+          </li>
+        </ul>
+      </div>
+      <div class="cards mb-4"> 
+        <ul class="list-group list-group-flush" id="tasksList"></ul>
+        <div class="accordion accordion-flush mt-2">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" id="doneTasks" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Выполненные⠀<span class="badge bg-secondary" id="doneTasksCounter">0</span></button>
+            </h2>
+            <ul class="list-group list-group-flush none" id="accordionDone"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-light">
+        <div class="card-header">Добавить задачу</div>
+        <div class="card-body"> 
+          <form id="form">
+            <div class="form-group"> 
+              <input class="form-control" id="taskInput" type="text" placeholder="Текст задачи" required maxlength="60">
+              <input class="form-control mt-3" id="listInput" type="text" placeholder="Список" maxlength="10">
+              <textarea class="form-control mt-3" id="descrInput" type="text" placeholder="Описание задачи" maxlength="500" rows="3" style="resize: none"></textarea>
+              <input class="mt-2 form-control" id="dateInput" type="date">
+              <div class="priority-wrapper">Установить приоритет<img src="./img/lowest.svg" alt="lowest" data-priority="lowest" width="25" height="25"><img src="./img/low.svg" alt="low" data-priority="low" width="25" height="25"><img src="./img/medium.svg" alt="medium" data-priority="medium" width="25" height="25"><img src="./img/high.svg" alt="high" data-priority="high" width="25" height="25"><img src="./img/highest.svg" alt="highest" data-priority="highest" width="25" height="25"></div><small class="form-text text-muted" id="emailHelp">Что делаем, сколько времени тратим, какой результат получаем.</small>
+            </div>
+            <button class="btn btn-primary btn-lg active" type="submit">Добавить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>
