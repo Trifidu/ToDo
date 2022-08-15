@@ -3,59 +3,6 @@
 
 // @import './blocks/header/header.scss';
 
-html,
-body {
-  min-height: 100vh;
-}
-
-body {
-  background-color: #e4e5e7;
-  padding-top: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.aside {
-  height: 400px;
-}
-
-.main {
-  height: 400px;
-}
-
-.d-flex {
-  display: flex;
-}
-
-.task-title {
-  min-width: 65%;
-  font-weight: 400;
-  padding-top: 5px;
-}
-
-.task-title-priority {
-  width: 100px;
-  font-weight: 400;
-  padding-top: 5px;
-}
-
-.task-title-list {
-  width: 100px;
-  font-weight: 400;
-  padding-top: 5px;
-}
-
-.more-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.gray {
-  color: #bdbdbd;
-}
-
 .task-title--done {
   text-decoration: line-through;
   color: #cdcdcd;

@@ -1,0 +1,12 @@
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  background-color: #e4e5e7;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
