@@ -18,6 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   checkEmptyList();
   doneTasksCounting();
+  console.log("hello world");
 
   //! add task and list
   function addTask(e) {
