@@ -98,7 +98,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/elements */ "./src/js/modules/elements.js");
 
 window.addEventListener("DOMContentLoaded", () => {
-  //! load render
+  const form = document.querySelector("#form");
+  const taskInput = document.querySelector("#taskInput");
+  const listInput = document.querySelector("#listInput");
+  const descrInput = document.querySelector("#descrInput");
+  const dateInput = document.querySelector("#dateInput");
+  const tasksList = document.querySelector("#tasksList");
+  const emptyList = document.querySelector("#emptyList");
+  const doneTasksBtn = document.querySelector("#doneTasks");
+  const doneTasksList = document.querySelector("#accordionDone");
+  const doneTasksCounter = document.querySelector("#doneTasksCounter");
+  const dropdownMenuButton = document.querySelector("#dropdownMenuButton");
+  const mainDropdownMenu = document.querySelector("#mainDropdownMenu");
+  let tasks = [];
+  let tasksDone = [];
+  let lists = ["Выполненные"];
+  let priority = ""; //! load render
+
   if (localStorage.getItem("tasks")) {
     tasks = JSON.parse(localStorage.getItem("tasks"));
     tasks.forEach(task => renderTask(task, tasksList));
@@ -114,7 +130,8 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   checkEmptyList();
-  doneTasksCounting(); //! add task and list
+  doneTasksCounting();
+  console.log("hello world"); //! add task and list
 
   function addTask(e) {
     e.preventDefault();
@@ -136,11 +153,11 @@ window.addEventListener("DOMContentLoaded", () => {
     };
     priority.length > 0 ? newTask.priority = priority : newTask.priority = "medium";
 
-    if (!_modules_elements__WEBPACK_IMPORTED_MODULE_0__["lists"].includes(newTask.list)) {
-      _modules_elements__WEBPACK_IMPORTED_MODULE_0__["lists"].push(newTask.list);
+    if (!lists.includes(newTask.list)) {
+      lists.push(newTask.list);
     }
 
-    _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].push(newTask);
+    tasks.push(newTask);
     renderTask(newTask, tasksList);
     taskInput.value = "";
     listInput.value = "";
@@ -158,8 +175,8 @@ window.addEventListener("DOMContentLoaded", () => {
     if (e.target.dataset.action !== "delete") return;
     const parentNode = e.target.closest("li");
     const id = parentNode.id;
-    const index = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].findIndex(task => task.id === +id);
-    _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].splice(index, 1);
+    const index = tasks.findIndex(task => task.id === +id);
+    tasks.splice(index, 1);
     parentNode.remove();
     checkEmptyList();
     saveToLocalStorage();
@@ -171,8 +188,8 @@ window.addEventListener("DOMContentLoaded", () => {
     if (e.target.dataset.action !== "delete") return;
     const parentNode = e.target.closest("li");
     const id = parentNode.id;
-    const index = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].findIndex(task => task.id === +id);
-    _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].splice(index, 1);
+    const index = tasksDone.findIndex(task => task.id === +id);
+    tasksDone.splice(index, 1);
     parentNode.remove();
     checkEmptyList();
     saveToLocalStorage();
@@ -204,15 +221,15 @@ window.addEventListener("DOMContentLoaded", () => {
     if (e.target.dataset.action !== "done") return;
     const parentNode = e.target.closest("li");
     const id = parentNode.id;
-    const taskObj = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].find(task => task.id === +id);
+    const taskObj = tasks.find(task => task.id === +id);
     taskObj.done = !taskObj.done;
     const taskTitle = parentNode.querySelector(".task-title");
     taskTitle.classList.toggle("task-title--done");
     checkDoneTask(taskObj, e);
     renderTask(taskObj, doneTasksList);
-    const index = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].findIndex(task => task.id === +id);
-    _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].push(_modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"][index]);
-    _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].splice(index, 1);
+    const index = tasks.findIndex(task => task.id === +id);
+    tasksDone.push(tasks[index]);
+    tasks.splice(index, 1);
     parentNode.remove();
     checkEmptyList();
     saveToLocalStorage();
@@ -225,15 +242,15 @@ window.addEventListener("DOMContentLoaded", () => {
     if (e.target.dataset.action !== "done") return;
     const parentNode = e.target.closest("li");
     const id = parentNode.id;
-    const taskObj = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].find(task => task.id === +id);
+    const taskObj = tasksDone.find(task => task.id === +id);
     taskObj.done = !taskObj.done;
     const taskTitle = parentNode.querySelector(".task-title");
     taskTitle.classList.toggle("task-title--done");
     checkDoneTask(taskObj, e);
     renderTask(taskObj, tasksList);
-    const index = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].findIndex(task => task.id === +id);
-    _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].push(_modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"][index]);
-    _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].splice(index, 1);
+    const index = tasksDone.findIndex(task => task.id === +id);
+    tasks.push(tasksDone[index]);
+    tasksDone.splice(index, 1);
     parentNode.remove();
     checkEmptyList();
     saveToLocalStorage();
@@ -261,7 +278,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function doneTasksCounting() {
-    const count = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].length;
+    const count = tasksDone.length;
     doneTasksCounter.textContent = `${count}`;
   } //! toggle done list
 
@@ -278,7 +295,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (e.target.dataset.action !== "star") return;
     const parentNode = e.target.closest("li");
     const id = parentNode.id;
-    const taskObj = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].find(task => task.id === +id);
+    const taskObj = tasks.find(task => task.id === +id);
     taskObj.favorite = !taskObj.favorite;
     const taskTitle = parentNode.querySelector(".task-title");
     taskTitle.classList.toggle("task-title--star");
@@ -291,7 +308,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (e.target.dataset.action !== "star") return;
     const parentNode = e.target.closest("li");
     const id = parentNode.id;
-    const taskObj = _modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"].find(task => task.id === +id);
+    const taskObj = tasksDone.find(task => task.id === +id);
     taskObj.favorite = !taskObj.favorite;
     const taskTitle = parentNode.querySelector(".task-title");
     taskTitle.classList.toggle("task-title--star");
@@ -310,7 +327,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", addPriority); //! show empty list
 
   function checkEmptyList() {
-    if (_modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].length === 0) {
+    if (tasks.length === 0) {
       const emptyListHtml = `
       <li id="emptyList" class="list-group-item empty-list">
         <img src="./img/no-tasks.svg" alt="Empty" width="48" class="mt-3">
@@ -321,7 +338,7 @@ window.addEventListener("DOMContentLoaded", () => {
       tasksList.insertAdjacentHTML("afterbegin", emptyListHtml);
     }
 
-    if (_modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"].length > 0) {
+    if (tasks.length > 0) {
       const emptyListElement = document.querySelector("#emptyList");
       emptyListElement ? emptyListElement.remove() : null;
     }
@@ -329,9 +346,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
   function saveToLocalStorage() {
-    localStorage.setItem("tasks", JSON.stringify(_modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasks"]));
-    localStorage.setItem("lists", JSON.stringify(_modules_elements__WEBPACK_IMPORTED_MODULE_0__["lists"]));
-    localStorage.setItem("tasksDone", JSON.stringify(_modules_elements__WEBPACK_IMPORTED_MODULE_0__["tasksDone"]));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("lists", JSON.stringify(lists));
+    localStorage.setItem("tasksDone", JSON.stringify(tasksDone));
   } //! open main menu
 
 

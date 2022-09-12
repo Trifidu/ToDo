@@ -1,6 +1,25 @@
 import { tasks, tasksDone, lists } from "./modules/elements";
 
 window.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("#form");
+  const taskInput = document.querySelector("#taskInput");
+  const listInput = document.querySelector("#listInput");
+  const descrInput = document.querySelector("#descrInput");
+  const dateInput = document.querySelector("#dateInput");
+  const tasksList = document.querySelector("#tasksList");
+  const emptyList = document.querySelector("#emptyList");
+  const doneTasksBtn = document.querySelector("#doneTasks");
+  const doneTasksList = document.querySelector("#accordionDone");
+  const doneTasksCounter = document.querySelector("#doneTasksCounter");
+  const dropdownMenuButton = document.querySelector("#dropdownMenuButton");
+  const mainDropdownMenu = document.querySelector("#mainDropdownMenu");
+
+  let tasks = [];
+  let tasksDone = [];
+  let lists = ["Выполненные"];
+
+  let priority = "";
+
   //! load render
   if (localStorage.getItem("tasks")) {
     tasks = JSON.parse(localStorage.getItem("tasks"));
