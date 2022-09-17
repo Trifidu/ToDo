@@ -14,4 +14,4 @@
 
 ## Link
 
-[versel-ToDo](https://to-do-kohl.vercel.app)
+[vercel-ToDo](https://to-do-kohl.vercel.app)
